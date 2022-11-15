@@ -23,10 +23,10 @@ const StyledCircle = styled.div`
   position: absolute;
   width: 15px;
   height: 15px;
+  border-radius: 50%;
   &:hover {
     background-color: ${COLOR.LIGHT_GRAY};
     opacity: 0.2;
-    border-radius: 50%;
   }
 `;
 const StyledImg = styled.img`
