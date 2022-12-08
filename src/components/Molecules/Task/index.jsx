@@ -3,12 +3,13 @@ import styled from "styled-components";
 import Input from "../../Atoms/Input";
 import Checkbox from "../../Atoms/Checkbox";
 import EditButton from "../../Atoms/EditButton";
+import COLOR from "../../../variables/color";
+import TEXT from "../../../variables/texts";
 const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
   const [isEditing, setisEditing] = useState(defaultIsEditing);
-  const onClickGreeting = () => {
+  const onSwitchFunction = () => {
     setisEditing(!isEditing);
   };
-
   return (
     <StyledWrapper>
       <StyledCheckboxWrapper>
@@ -17,13 +18,16 @@ const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
       {isEditing && (
         <Input
           defaultValue={taskName}
-          onEditComplete={(onTaskChange, onClickGreeting)}
+          onEditComplete={(value) => {
+            onTaskChange(value);
+            onSwitchFunction();
+          }}
         />
       )}
       {!isEditing && (
         <StyledNameAndButtonWrapper>
           <StyledTaskName>{taskName}</StyledTaskName>
-          <EditButton onClick={onClickGreeting} />
+          <EditButton onClick={onSwitchFunction} />
         </StyledNameAndButtonWrapper>
       )}
     </StyledWrapper>
@@ -43,9 +47,6 @@ const StyledNameAndButtonWrapper = styled.div`
   width: 100%;
 `;
 const StyledTaskName = styled.div`
-  font-family: Noto Sans JP;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: #b8b8b8;
+  color: ${COLOR.LIGHT_GRAY};
+  ${TEXT.S}
 `;
