@@ -6,16 +6,16 @@ import EditButton from "../../Atoms/EditButton";
 import COLOR from "../../../variables/color";
 import TEXT from "../../../variables/texts";
 const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
-  const [isEditing, setisEditing] = useState(defaultIsEditing);
+  const [isEditing, setIsEditing] = useState(defaultIsEditing);
   const onSwitchFunction = () => {
-    setisEditing(!isEditing);
+    setIsEditing(!isEditing);
   };
   return (
     <StyledWrapper>
       <StyledCheckboxWrapper>
         <Checkbox onClick={onTaskComplete} />
       </StyledCheckboxWrapper>
-      {isEditing && (
+      {isEditing ? (
         <Input
           defaultValue={taskName}
           onEditComplete={(value) => {
@@ -23,8 +23,7 @@ const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
             onSwitchFunction();
           }}
         />
-      )}
-      {!isEditing && (
+      ) : (
         <StyledNameAndButtonWrapper>
           <StyledTaskName>{taskName}</StyledTaskName>
           <EditButton onClick={onSwitchFunction} />
