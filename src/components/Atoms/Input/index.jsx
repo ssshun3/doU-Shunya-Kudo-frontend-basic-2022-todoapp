@@ -10,6 +10,7 @@ const Input = ({ onEditComplete, defaultValue }) => {
     ref.current.value = defaultValue;
     ref.current.focus();
     ref.current.onblur = () => {
+      if (ref.current === null) return;
       onEditComplete(ref.current.value);
     };
     ref.current.onkeydown = () => {
