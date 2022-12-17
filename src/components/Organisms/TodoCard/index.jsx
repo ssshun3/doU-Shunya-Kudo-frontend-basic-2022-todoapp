@@ -35,7 +35,7 @@ const TodoCard = () => {
       {taskList.map((task, index) => (
         <Task
           key={index}
-          onTaskComplete={(index) => onTaskComplete(index)}
+          onTaskComplete={() => onTaskComplete(index)}
           onTaskChange={(value) => onTaskChange(value, index)}
           taskName={task.name}
           defaultIsEditing={task.initializing}
