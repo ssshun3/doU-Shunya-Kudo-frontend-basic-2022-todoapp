@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Task from "../../Molecules/Task";
 import AddTaskButton from "../../Atoms/AddTaskButton";
@@ -25,9 +25,17 @@ const TodoCard = () => {
     } else {
       const newTaskList = [...taskList];
       newTaskList[index].name = value;
+      newTaskList[index].initializing = false;
       setTaskList(newTaskList);
     }
   };
+  useEffect(() => {
+    if (JSON.parse(window.localStorage.getItem("taskList")) === null) return;
+    setTaskList(JSON.parse(window.localStorage.getItem("taskList")));
+  }, []);
+  useEffect(() => {
+    window.localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
   return (
     <StyledWrapper>
       <AddTaskButton onClick={onAddTaskButtonClick} />
