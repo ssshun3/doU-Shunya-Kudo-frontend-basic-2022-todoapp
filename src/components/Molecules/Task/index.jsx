@@ -7,6 +7,11 @@ import COLOR from "../../../variables/color";
 import TEXT from "../../../variables/texts";
 const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
   const [isEditing, setIsEditing] = useState(defaultIsEditing);
+
+  const onEditComplete = (value) => {
+    setIsEditing(!isEditing);
+    onTaskChange(value);
+  };
   const onSwitchFunction = () => {
     setIsEditing(!isEditing);
   };
@@ -16,13 +21,7 @@ const Task = ({ onTaskChange, onTaskComplete, taskName, defaultIsEditing }) => {
         <Checkbox onClick={onTaskComplete} />
       </StyledCheckboxWrapper>
       {isEditing ? (
-        <Input
-          defaultValue={taskName}
-          onEditComplete={(value) => {
-            onTaskChange(value);
-            onSwitchFunction();
-          }}
-        />
+        <Input defaultValue={taskName} onEditComplete={onEditComplete} />
       ) : (
         <StyledNameAndButtonWrapper>
           <StyledTaskName>{taskName}</StyledTaskName>
