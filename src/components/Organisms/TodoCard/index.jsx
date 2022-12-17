@@ -17,21 +17,30 @@ const TodoCard = () => {
     deletedTodoList.splice(index, 1);
     setTaskList(deletedTodoList);
   };
-  const onTaskNameChange = (value, index) => {};
+  const onTaskChange = (value, index) => {
+    if (value === "") {
+      const addTaskList = [...taskList];
+      addTaskList.splice(index, 1);
+      setTaskList(addTaskList);
+    } else {
+      const newTaskList = [...taskList];
+      newTaskList[index].name = value;
+      setTaskList(newTaskList);
+    }
+  };
   return (
     <StyledWrapper>
       <AddTaskButton onClick={onAddTaskButtonClick} />
-      <StyledTaskList>
-        {taskList.map((task, index) => (
-          <Task
-            key={index}
-            onTaskComplete={(index) => onTaskComplete(index)}
-            onTaskNameChange={(value) => onTaskNameChange(value, index)}
-            taskName={task.name}
-            defaultIsEditing={task.initializing}
-          />
-        ))}
-      </StyledTaskList>
+
+      {taskList.map((task, index) => (
+        <Task
+          key={index}
+          onTaskComplete={(index) => onTaskComplete(index)}
+          onTaskChange={(value) => onTaskChange(value, index)}
+          taskName={task.name}
+          defaultIsEditing={task.initializing}
+        />
+      ))}
     </StyledWrapper>
   );
 };
@@ -39,16 +48,8 @@ export default TodoCard;
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   background-color: ${COLOR.LIGHT_BLACK};
   border-radius: 4px;
   padding: 20px;
   gap: 10px;
-`;
-const StyledTaskList = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2px 6px;
-  gap: 10px;
-  align-self: stretch;
 `;
