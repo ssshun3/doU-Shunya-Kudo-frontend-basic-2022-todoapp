@@ -9,6 +9,11 @@ const Alert = ({ alertMessage, isActive }) => {
 };
 export default Alert;
 const StyledAlertText = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 80px;
+  margin: auto;
   background-color: ${COLOR.RED};
   border-radius: 4px;
   padding: 10px 20px;
@@ -17,6 +22,7 @@ const StyledAlertText = styled.div`
   ${TEXT.S};
   @media screen and (max-width: ${BREAKPOINT.MEDIUM}) {
     width: 100%;
+    top: 40px;
   }
   transition: 0.5s;
   ${(props) =>
