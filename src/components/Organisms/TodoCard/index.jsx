@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Task from "../../Molecules/Task";
 import AddTaskButton from "../../Atoms/AddTaskButton";
 import COLOR from "../../../variables/color";
+import { useAlertHandlerContext } from "../../../contexts/alert_handler";
 const TodoCard = () => {
+  const AlertHandlerContext = useAlertHandlerContext();
   const [taskList, setTaskList] = useState([]);
   const onAddTaskButtonClick = () => {
     const todoTask = {
@@ -22,6 +24,7 @@ const TodoCard = () => {
       const addTaskList = [...taskList];
       addTaskList.splice(index, 1);
       setTaskList(addTaskList);
+      AlertHandlerContext.setAlert("タスクの名前が設定されていません");
     } else {
       const newTaskList = [...taskList];
       newTaskList[index].name = value;
