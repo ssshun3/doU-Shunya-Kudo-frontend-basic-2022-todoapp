@@ -8,6 +8,8 @@ const TodoCard = () => {
   const AlertHandlerContext = useAlertHandlerContext();
   const [taskList, setTaskList] = useState([]);
   const onAddTaskButtonClick = () => {
+
+    
     const todoTask = {
       name: "",
       initializing: true,
