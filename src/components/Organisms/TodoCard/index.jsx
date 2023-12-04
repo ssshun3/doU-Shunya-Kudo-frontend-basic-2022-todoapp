@@ -8,15 +8,13 @@ const TodoCard = () => {
   const AlertHandlerContext = useAlertHandlerContext();
   const [taskList, setTaskList] = useState([]);
   const onAddTaskButtonClick = () => {
-
-    
     const todoTask = {
       name: "",
       initializing: true,
     };
     setTaskList(taskList.concat(todoTask));
   };
-  const onTaskComplete = (index) => {
+  const onTaskComplete = index => {
     const deletedTodoList = [...taskList];
     deletedTodoList.splice(index, 1);
     setTaskList(deletedTodoList);
@@ -41,6 +39,7 @@ const TodoCard = () => {
   useEffect(() => {
     window.localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
+
   return (
     <StyledWrapper>
       <AddTaskButton onClick={onAddTaskButtonClick} />
@@ -49,7 +48,7 @@ const TodoCard = () => {
         <Task
           key={index}
           onTaskComplete={() => onTaskComplete(index)}
-          onTaskChange={(value) => onTaskChange(value, index)}
+          onTaskChange={value => onTaskChange(value, index)}
           taskName={task.name}
           defaultIsEditing={task.initializing}
         />
